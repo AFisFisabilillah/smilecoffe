@@ -1,4 +1,34 @@
 <x-layout>
+    @if (session()->has("succes"))
+
+
+        <div id="marketing-banner" tabindex="-1"
+            class="fixed z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border-2 rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600 border-primary-0">
+            <div class="flex flex-col items-start mb-3 me-4 md:items-center md:flex-row md:mb-0">
+                <a href="https://flowbite.com/"
+                    class="flex items-center mb-2 border-gray-200 md:pe-4 md:me-4 md:border-e md:mb-0 dark:border-gray-600">
+                    <img src="{{ asset("img/aset/logo/2.png") }}" class="h-6 me-2" alt="Flowbite Logo">
+                    <span class="self-center text-lg font-semibold whitespace-nowrap dark:text-white">Smile coffe</span>
+                </a>
+                <p class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
+                   {{ session("succes") }}</p>
+            </div>
+            <div class="flex items-center flex-shrink-0">
+                
+                <button data-dismiss-target="#marketing-banner" type="button"
+                    class="flex-shrink-0 inline-flex justify-center w-7 h-7 items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close banner</span>
+                </button>
+            </div>
+        </div>
+
+
+    @endif
     <section class="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
         <nav class="flex mb-10 -mt-8 ml-14" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -122,17 +152,22 @@
                             Add to favorites
                         </a>
 
-                        <a href="#" title=""
-                            class="text-white mt-4 sm:mt-0 bg-blueCustom-700 hover:bg-blueCustom-800 focus:ring-4 focus:ring-blueCustom-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blueCustom-600 dark:hover:bg-blueCustom-700 focus:outline-none dark:focus:ring-blueCustom-800 flex items-center justify-center"
-                            role="button">
-                            <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-                            </svg>
-                            Add to cart
-                        </a>
+                        <form action="{{ route("cartAdd", $product->id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id_product" value="{{ $product->id }}">
+                            <button name="cart" type="submit"
+                                class="inline-flex items-center rounded-lg bg-blueCustom-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blueCustom-800 focus:outline-none focus:ring-4  focus:ring-blueCustom-300 dark:bg-blueCustom-600 dark:hover:bg-blueCustom-700 dark:focus:ring-blueCustom-800">
+                                <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
+                                </svg>
+                                Add to cart
+                            </button>
+                        </form>
+
+
                     </div>
 
                     <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
