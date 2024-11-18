@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardAdminController;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
@@ -37,5 +38,4 @@ Route::get('/login', [LoginController::class,'index'])->name('login')->middlewar
 Route::post('/login', [LoginController::class,'login']);
 
 Route::post("/menu/product/{product}/cart", [CartController::class, 'store'] )->name("cartAdd");
-
 Route::get("/dashboard",[DashboardAdminController::class, 'index'] )->middleware("admin")->name('dashboard');

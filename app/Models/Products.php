@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Products extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name','description', 'id_category','price', 'quantity'];
     protected $with = ['category'];
 
     public function category():BelongsTo{
